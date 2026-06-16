@@ -18,3 +18,6 @@ class CardDetails(CardInfo):
     card_type = models.ForeignKey('CardType', related_name='CardType', on_delete=models.CASCADE, null=True, blank=True)
     monster_type = models.ForeignKey('MonsterType', related_name='MonsterType', on_delete=models.CASCADE, null=True, blank=True)
     monster_attribute = models.ForeignKey('MonsterAttribute', related_name='MonsterAttribute', on_delete=models.CASCADE, null=True, blank=True)
+    stars = models.IntegerField()
+    attack = models.IntegerField()
+    defense = models.IntegerField()
