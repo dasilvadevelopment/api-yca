@@ -27,5 +27,5 @@ class CardDetails(CardInfo):
     frame_type = models.ForeignKey('FrameType', related_name='FrameType', on_delete=models.CASCADE, null=True, blank=True)
     full_series = models.ForeignKey('Series', related_name='Series', on_delete=models.CASCADE)
     level = models.IntegerField(null=True, blank=True)
-    attack = models.IntegerField()
-    defense = models.IntegerField()
+    attack = models.IntegerField(null=True, blank=True)
+    defense = models.IntegerField(null=True, blank=True)
