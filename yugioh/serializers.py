@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from .models import Rarity, CardType, MonsterType, MonsterAttribute, FrameType, Series, CardDetails
+from .models import Rarity, CardType, MonsterType, MonsterAttribute, FrameType, Series, CardDetails, PrintSeries
 
 class RaritySerializer(serializers.ModelSerializer):
     class Meta:
@@ -36,3 +36,7 @@ class CardDetailSerializers(serializers.ModelSerializer):
         model = CardDetails
         fields = ['name', 'rarity', 'card_type', 'monster_type', 'monster_attribute', 'frame_type', 'level', 'full_series', 'attack', 'defense', 'description', 'series', 'image']
         depth = 1
+class PrintSeriesSerializers(serializers.ModelSerializer):
+    class Meta:
+        model = PrintSeries
+        fields = ['card', 'rarity', 'series']
