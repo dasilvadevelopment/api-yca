@@ -85,3 +85,28 @@ Add `null=True, blank=True` to the field.
 Both are needed together for FK fields.
 
 ---
+
+**Q: What are serializers in DRF?**
+Serializers convert model instances to JSON (and back). `ModelSerializer` is the standard starting point — it maps directly to a model. Import with `from rest_framework import serializers` and inherit from `serializers.ModelSerializer`. Requires a `Meta` class with `model` and `fields`.
+
+---
+
+**Q: How do I include the actual related values instead of just IDs in a serializer?**
+Add `depth = 1` to the `Meta` class. DRF will expand FK relationships one level deep, returning the full related object as a nested dict instead of just an ID.
+
+---
+
+**Q: What is ModelViewSet and why use it over ViewSet?**
+`ModelViewSet` automatically provides `list`, `retrieve`, `create`, `update`, and `destroy` — no need to write any methods manually. Just set `queryset` and `serializer_class` as class attributes. The HTTP method determines the action (GET = list/retrieve, POST = create, etc.).
+
+---
+
+**Q: How do I set up URLs for a ModelViewSet?**
+Use `DefaultRouter` from `rest_framework.routers`. Create a router instance, call `router.register('prefix', ViewSet)`, then include `router.urls` in `urlpatterns`. Prefix the whole thing with `api/` using `include()`.
+
+---
+
+**Q: When do I run migrations?**
+After all apps are added to `INSTALLED_APPS` in `settings.py`. Run `python manage.py makemigrations` first to generate migration files, then `python manage.py migrate` to apply them to the database.
+
+---
