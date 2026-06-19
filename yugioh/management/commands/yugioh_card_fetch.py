@@ -11,21 +11,6 @@ class Command(BaseCommand):
             race = None
             frame_type = None
             attribute = None
-            if card.get('card_sets'):
-                for rarity in card['card_sets']:
-                    obj, created = Rarity.objects.get_or_create(
-                            name = rarity['set_rarity']
-                    )
-                    if created:
-                        print(rarity['set_rarity'])
-                card_rarity = obj
-                for card_set in card['card_sets']:
-                    obj, created = Series.objects.get_or_create(
-                            name = card_set['set_name']
-                    )
-                    if created:
-                        print(card_set['set_name'])
-                set_name = obj
             if card.get('type'):
                 obj, created = CardType.objects.get_or_create(
                     name = card['type']
@@ -69,3 +54,27 @@ class Command(BaseCommand):
                     'defense'           : card.get('def'),
                 }
             )
+            if created:
+                print(card['name'])
+            full_card = obj
+        
+            if card.get('card_sets'):
+
+                for series_name in card['card_sets']:
+                    obj, created = Series.objects.get_or_create(
+                        name = series_name['set_name']
+                    )
+                    the_series_name = obj
+                    obj, created = Rarity.objects.get_or_create(
+                        name = series_name['set_rarity']
+                    )
+                    the_series_rarity = obj
+                    obj, created = PrintSeries.objects.get_or_create(
+                        card = full_card,
+                        full_series = the_series_name,
+                        defaults={
+                            'rarity'        : the_series_rarity,
+                            'series_code'   : series_name['set_code']
+                        }
+                    )
+                

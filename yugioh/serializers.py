@@ -39,4 +39,4 @@ class CardDetailSerializers(serializers.ModelSerializer):
 class PrintSeriesSerializers(serializers.ModelSerializer):
     class Meta:
         model = PrintSeries
-        fields = ['card', 'rarity', 'series']
+        fields = ['card', 'rarity', 'full_series', 'series_code']
